@@ -1,0 +1,13 @@
+NO ./assets/textures/brick.xpm
+SO ./assets/textures/stone.xpm
+WE ./assets/textures/tile.xpm
+EA ./assets/textures/wood.xpm
+
+F 100,80,60
+C 135,206,235
+
+1111111
+1000001
+100N001
+1000001
+1111111
