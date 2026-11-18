@@ -1,107 +1,48 @@
-*This project has been created as part of the 42 curriculum by caida-si.*
-
 # NetPractice
 
-## Description
+*42 Common Core project by `caida-si`.*
 
-NetPractice is an educational platform designed to teach networking fundamentals through hands-on exercises. The project provides a series of networking challenges that progressively increase in difficulty, helping learners understand IP addressing, routing, and network configuration concepts.
+NetPractice is a set of ten browser-based exercises on IPv4 networking. You don't write a network program; you configure addresses, subnet masks, gateways, and routes until the devices in each diagram can communicate.
 
-**Goal**: To introduce students to the basics of computer networking by configuring IP addresses, connecting devices through routers, and understanding the role of gateways within networks. Through 10 practical exercises, learners develop competency in TCP/IP addressing, subnet configuration, and network topology design.
+## Networking concepts
 
-## Resources
+- **IPv4 and CIDR:** the address and mask determine which part identifies the network and which part identifies the host.
+- **Subnetting:** two hosts on the same subnet can communicate directly; hosts on different subnets need a route.
+- **Gateways and routes:** the gateway must be reachable on the local network. A default route is used when no more specific route matches.
+- **Routers and switches:** a switch joins devices on the same network; a router forwards packets between networks.
 
-### Networking Concepts Covered
+For example, in `192.168.1.0/24`, the `/24` mask leaves eight host bits. The network address is `192.168.1.0`, the broadcast address is `192.168.1.255`, and the usual usable host range is `.1`–`.254`. Assigning a valid address is only half the exercise: every intermediate router also needs a way to return traffic.
 
-This project covers essential networking fundamentals:
+The early levels focus on addresses and masks, while later exercises require static routes across several routers. A quick way to debug a failed level is to follow the packet forward **and back** and inspect the route at each hop.
 
-- **TCP/IP Addressing**: Understanding IP address structure, classes, and allocation
-- **Subnet Masks**: Calculating subnets and subnet ranges
-- **CIDR Notation**: Classless Inter-Domain Routing for efficient address management
-- **Default Gateways**: Routing traffic between networks and network segments
-- **Routers and Switches**: Network devices and their roles in data transmission
-- **Routing Tables**: Configuring static routes for network communication
-- **OSI Layers**: Understanding the role of different layers in network communication
-- **Network Design**: Topology planning and device interconnection
-- **IP Routing**: Forward decision-making and path selection
+## Open the training interface
 
-### Reference Documentation
+Requires Python 3 and a browser. From the directory containing the bundled `run.sh` script:
 
-- **RFC 791 - Internet Protocol**: [https://tools.ietf.org/html/rfc791](https://tools.ietf.org/html/rfc791)
-- **RFC 1918 - Private Internet Addresses**: [https://tools.ietf.org/html/rfc1918](https://tools.ietf.org/html/rfc1918)
-- **Subnet Calculator**: Available via the training interface
-- **TCP/IP Protocol Suite**: Comprehensive reference on networking protocols
-- **OSI Model Reference**: Understanding the 7-layer networking model
-
-### Technical References
-
-- **IPv4 Addressing Guide**: Study TCP/IP addressing to strengthen understanding of network configuration
-- **Network Configuration Best Practices**: Learn how to design and validate network topologies
-- **Packet Flow Analysis**: Understanding how data moves through networks using routing tables
-
-### AI Usage in this Project
-
-AI tools were used to:
-- **Documentation**: Generating initial README structure and layout
-- **Task**: Creating formatted documentation following project requirements
-- **Implementation**: No AI was used for the actual network configuration exercises or solution files. All networking problem-solving was completed manually by the student.
-- **Content Review**: AI was used to ensure clarity and completeness of documentation against subject requirements
-
-All actual networking concepts, configurations, and solutions were derived from direct learning and manual problem-solving.
-
-## Instructions
-
-### Prerequisites
-
-- Python 3
-- A modern web browser
-- Unix-like system (Linux, macOS)
-
-### Running the Training Interface
-
-1. Navigate to the project directory:
-```bash
-cd netpractice/net_practice.1.9/net_practice
-```
-
-2. Start the web server using the provided script:
-```bash
+```sh
 ./run.sh
 ```
 
-The script will:
-- Find an available port (starting from 49242)
-- Automatically open your default web browser
-- Display the URL if automatic opening fails
+The script starts a local web server, normally using a free port starting at `49242`, and opens the browser. If it doesn't launch correctly:
 
-**Manual alternative**: If `run.sh` does not work, run:
-```bash
+```sh
 python3 -m http.server 49242
 ```
-Then navigate to `http://localhost:49242` in your web browser.
 
-3. **Configure your login**:
-   - Enter your intranet login in the "Training" tab to use your personal configuration
-   - Alternatively, use the "Evaluation" tab to generate a random configuration
+Then open `http://localhost:49242` from that same directory.
 
-4. **Complete the levels**:
-   - Solve 10 levels of increasing difficulty
-   - For each level, modify unshaded fields until the network configuration is correct
-   - Use the **[Check again]** button to verify your configuration
-   - Logs at the bottom of the page will help you understand any errors
+1. Enter your 42 login in **Training** mode.
+2. Configure the editable fields and click **Check again**.
+3. Read the error log to see which connection is failing.
+4. After solving a level, click **Get my config**.
+5. Keep the exported configuration for each of the ten levels (`level1.json`, etc.) in the submission repository.
 
-### Exporting Configurations
+**Evaluation** mode gives random configurations. The documented evaluation uses three selected exercises from the harder levels with a time limit; check the current project subject for the official conditions.
 
-After successfully completing each level:
+## References
 
-1. Click the **[Get my config]** button to download your configuration file
-2. Place each of the 10 configuration files at the root of your Git repository
-3. The files should be named according to their level (e.g., `level1.json`, `level2.json`, etc.)
+- [RFC 791 — IPv4](https://www.rfc-editor.org/rfc/rfc791)
+- [RFC 1918 — private IPv4 address space](https://www.rfc-editor.org/rfc/rfc1918)
+- `ip route` and `ip addr` manuals for seeing the same ideas on a Linux machine.
 
-**Important**: You must export and submit configuration files for all 10 levels.
-
-### Evaluation
-
-- In the "Evaluation" tab, you can practice the timed evaluation mode
-- You will have **15 minutes** to randomly selected 3 levels from difficulty 6-10
-- During official evaluation, you are only allowed to use a simple calculator (e.g., `bc`)
-- No external tools are permitted during evaluation 
+AI was used to structure and review the original documentation, not to solve or generate the network configuration files.
